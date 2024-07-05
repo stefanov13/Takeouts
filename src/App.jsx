@@ -14,8 +14,8 @@ function App() {
             <img className="heroImage" src="/images/landing_page_food_1920.png" alt="Cooking-bg-picture" />
             <div className="heroOverlay"></div>
             <Header />
-            <div className="heroWrapper">
 
+            <div className="heroWrapper">
                 <main>
                     <Routes>
                         <Route path="/" element={<Home />} />
@@ -23,8 +23,8 @@ function App() {
                         {/* <Route path="create-recipe/" element={<CreateRecipe />} /> */}
                     </Routes>
                 </main>
-
             </div>
+            
             <Footer />
         </div>
     )
