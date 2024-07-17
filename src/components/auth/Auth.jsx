@@ -1,77 +1,9 @@
 import { React, useState } from 'react';
-import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import { AccountContext } from './accountContext';
 import Login from './Login';
 import Register from './Register';
-
-const BoxContainer = styled.div`
-  width: 280px;
-  min-height: 550px; // 650px
-  display: flex;
-  flex-direction: column;
-  border-radius: 19px;
-  background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0));
-  backdrop-filter: blur(5px);
-  box-shadow: 0 0 2px rgba(15, 15, 15, 0.28);
-  position: relative;
-  overflow: hidden;
-  justify-content: space-between;
-`;
-
-const TopContainer = styled.div`
-  width: 100%;
-  // height: 250px;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  padding: 0 1.8em;
-  padding-top: 5em;
-`;
-
-const BackDrop = styled(motion.div)`
-  position: absolute;
-  width: 160%;
-  height: 650px;
-  display: flex;
-  flex-direction: column;
-  border-radius: 50%;
-  top: -290px;
-  left: -70px;
-  transform: rotate(60deg);
-  background: linear-gradient(
-    58deg, rgba(243,172,18,0.24) 20%, rgba(241,196,15,1) 100%
-  );
-`;
-
-const HeaderContainer = styled.div`
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-`;
-
-const HeaderText = styled.div`
-  font-size: 30px;
-  font-weight: 600;
-  line-height: 1.24;
-  color: #fff;
-  z-index: 10;
-`;
-
-const SmallText = styled.div`
-  font-size: 11px;
-  font-weight: 500;
-  color: #fff;
-  margin-top: 7px;
-  z-index: 10;
-`;
-
-const InnerContainer = styled.div`
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  padding: 0px 20px;
-`;
+import styles from './Auth.module.css'
 
 const backdropVariants = {
   expanded: {
@@ -86,15 +18,15 @@ const backdropVariants = {
     borderRadius: "50%",
     transform: "rotate(60deg)"
   }
-}
+};
 
 const expandingTransition = {
   type: "spring",
   duration: 2.3,
-  stiffness: 30,
-}
+  stiffness: 30
+};
 
-export default function Auth(props) {
+export default function Auth() {
   const [isExpanded, setExpanded] = useState(false);
   const [active, setActive] = useState('signin');
 
@@ -103,50 +35,56 @@ export default function Auth(props) {
     setTimeout(() => {
       setExpanded(false);
     }, expandingTransition.duration * 1000 - 1500);
-  }
+  };
 
   const switchToSignup = () => {
     playExpandingAnimation();
     setTimeout(() => {
       setActive("signup");
     }, 400);
-  }
+  };
 
   const switchToSignin = () => {
     playExpandingAnimation();
     setTimeout(() => {
       setActive("signin");
     }, 400);
-  }
+  };
 
-  const contextValue = {switchToSignup, switchToSignin};
-  
+  const contextValue = { switchToSignup, switchToSignin };
+
   return (
-  <AccountContext.Provider value={contextValue}>
-  <BoxContainer>
-    <TopContainer>
-      <BackDrop 
-        initial={false}
-        animate={isExpanded ? "expanded" : "collapsed"}
-        variants={backdropVariants}
-        transition={expandingTransition}
-      />
-      {active === "signin" && <HeaderContainer>
-        <HeaderText>Welcome</HeaderText>
-        <HeaderText>Back</HeaderText>
-        <SmallText>Please sign-in to continue!</SmallText>
-      </HeaderContainer>}
-      {active === "signup" && <HeaderContainer>
-        <HeaderText>Create</HeaderText>
-        <HeaderText>Account</HeaderText>
-        <SmallText>Please sign-up to continue!</SmallText>
-      </HeaderContainer>}
-    </TopContainer>
-    <InnerContainer>
-      {active === "signin" && <Login />}
-      {active === "signup" && <Register />}
-    </InnerContainer>
-  </BoxContainer>
-  </AccountContext.Provider>  
+    <AccountContext.Provider value={contextValue}>
+      <div className={styles.boxContainer}>
+        <div className={styles.topContainer}>
+          <motion.div
+            className={styles.backDrop}
+            initial={false}
+            animate={isExpanded ? "expanded" : "collapsed"}
+            variants={backdropVariants}
+            transition={expandingTransition}
+          />
+          {active === "signin" && (
+            <div className={styles.headerContainer}>
+              <div className={styles.headerText}>Welcome</div>
+              <div className={styles.headerText}>Back</div>
+              <div className={styles.smallText}>Please sign-in to continue!</div>
+            </div>
+          )}
+          {active === "signup" && (
+            <div className={styles.headerContainer}>
+              <div className={styles.headerText}>Create</div>
+              <div className={styles.headerText}>Account</div>
+              <div className={styles.smallText}>Please sign-up to continue!</div>
+            </div>
+          )}
+        </div>
+        <div className={styles.innerContainer}>
+          {active === "signin" && <Login />}
+          {active === "signup" && <Register />}
+        </div>
+      </div>
+    </AccountContext.Provider>
   );
-};
+}
+

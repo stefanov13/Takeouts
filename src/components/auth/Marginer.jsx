@@ -1,24 +1,13 @@
 import React from "react";
-import styled from "styled-components";
-
-const HorizontalMargin = styled.span`
-  display: flex;
-  width: ${({ margin }) =>
-    typeof margin === "string" ? margin : `${margin}px`};
-`;
-
-const VerticalMargin = styled.span`
-  display: flex;
-  height: ${({ margin }) =>
-    typeof margin === "string" ? margin : `${margin}px`};
-`;
+import styles from './Marginer.module.css';
 
 export default function Marginer(props) {
-  const { direction } = props;
+  const { direction, margin } = props;
 
-  if (direction === "horizontal") return <HorizontalMargin {...props} />;
-  else {
-    return <VerticalMargin {...props} />;
+  if (direction === "horizontal") {
+    return <span className={styles.horizontalMargin} style={{ '--margin': margin }} />;
+  } else {
+    return <span className={styles.verticalMargin} style={{ '--margin': margin }} />;
   }
 }
 

@@ -1,0 +1,9 @@
+.horizontalMargin {
+    display: flex;
+    width: var(--margin);
+}
+
+.verticalMargin {
+    display: flex;
+    height: var(--margin);
+}

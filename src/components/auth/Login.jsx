@@ -11,8 +11,7 @@ import {
 import Marginer from "./Marginer";
 import { AccountContext } from './accountContext';
 
-export default function Login(props) {
-
+export default function Login() {
   const { switchToSignup } = useContext(AccountContext);
 
   return (
@@ -27,7 +26,7 @@ export default function Login(props) {
       <SubmitButton type="submit">Signin</SubmitButton>
       <Marginer direction="vertical" margin="5px" />
       <LineText>
-        Don't have an accoun?{" "}
+        Don't have an account?{" "}
         <BoldLink onClick={switchToSignup} href="#">
           Signup
         </BoldLink>

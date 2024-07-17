@@ -7,12 +7,10 @@ import Footer from './components/footer/Footer'
 import './App.css'
 
 function App() {
-    const [count, setCount] = useState(0)
 
     return (
         <div className='wrapper'>
-            <img className="heroImage" src="/images/landing_page_food_1920.png" alt="Cooking-bg-picture" />
-            <div className="heroOverlay"></div>
+
             <Header />
 
             <div className="heroWrapper">
@@ -24,7 +22,7 @@ function App() {
                     </Routes>
                 </main>
             </div>
-            
+
             <Footer />
         </div>
     )
