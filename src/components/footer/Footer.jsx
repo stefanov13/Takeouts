@@ -1,9 +1,9 @@
 import styles from "./Footer.module.css"
 
-export default function Footer () {
+export default function Footer() {
     return (
-        <div>
-            <h4 className={ styles.title }>Footer</h4>
-        </div>
+        <footer>
+            <h4 className={styles.title}>Footer</h4>
+        </footer>
     );
 };

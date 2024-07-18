@@ -13,15 +13,13 @@ function App() {
 
             <Header />
 
-            <div className="heroWrapper">
-                <main>
-                    <Routes>
-                        <Route path="/" element={<Home />} />
-                        <Route path='auth/' element={<Auth />} />
-                        {/* <Route path="create-recipe/" element={<CreateRecipe />} /> */}
-                    </Routes>
-                </main>
-            </div>
+            <main className='heroMain'>
+                <Routes>
+                    <Route path="/" element={<Home />} />
+                    <Route path='auth/' element={<Auth />} />
+                    {/* <Route path="create-recipe/" element={<CreateRecipe />} /> */}
+                </Routes>
+            </main>
 
             <Footer />
         </div>

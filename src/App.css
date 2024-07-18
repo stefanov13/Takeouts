@@ -37,31 +37,11 @@ code {
     flex-direction: column;
     min-height: 100vh;
     justify-content: space-between;
-    /* align-items: center; */
+    align-items: center;
 }
 
-.heroImage {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.heroOverlay {
-    position: absolute; 
-    width: 100%;
-    height: 100%;
-    top: 0px; 
-    left: 0px;
-    background-color: black;
-    opacity: 0.3;
-}
-
-.heroWrapper {
-    position: absolute;
-    top: 50%; 
-    left: 50%;
-    transform: translate(-50%, -50%);
-    /* text-align: center; */
+.heroMain {
+    display: flex;
 }
 
 /* .cover:before {
