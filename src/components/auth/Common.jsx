@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 import styles from './Common.module.css';
 
 export const BoxContainer = (props) => (
@@ -9,7 +11,7 @@ export const FormContainer = (props) => (
 );
 
 export const MutedLink = (props) => (
-  <a className={styles.mutedLink} {...props}>{props.children}</a>
+  <Link className={styles.mutedLink} {...props}>{props.children}</Link>
 );
 
 export const BoldLink = (props) => (

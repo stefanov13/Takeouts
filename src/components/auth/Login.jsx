@@ -22,7 +22,7 @@ export default function Login() {
                 <Input type="password" placeholder="Password" />
             </FormContainer>
             <Marginer direction="vertical" margin={10} />
-            <MutedLink href="#">Forget your password?</MutedLink>
+            <MutedLink to="/forgot-password">Forget your password?</MutedLink>
             <Marginer direction="vertical" margin="1.6em" />
             <SubmitButton type="submit">Signin</SubmitButton>
             <Marginer direction="vertical" margin="5px" />
