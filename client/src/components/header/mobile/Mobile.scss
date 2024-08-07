@@ -1,73 +1,80 @@
 @import "../../../responsive.scss";
 
 .navigationMobile {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  position: relative;
+
+  .contentLogoMobile {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    width: 100%;
-    position: relative;
+    gap: 10px;
 
-    .contentLogoMobile {
+    .logoMobile {
+      width: 100px;
+      height: 100px;
+    }
+  }
+
+  .contentButtonMobile {
+    z-index: 10;
+
+    .dropdownButtonMobile {
+      background-color: white;
+      border: 2px solid white;
+      border-radius: 100%;
+      font-size: 18px;
+      padding: 7px;
+      color: orange;
+      font-weight: 400;
+
+      .faBars {}
+    }
+
+    .contentDropdownMobile {
+      border: 2px solid orange;
+      background-color: white;
+      position: absolute;
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      top: 0;
+      left: 0;
+      align-items: center;
+
+      .contentOnCloseButtonMobile {
         display: flex;
-        align-items: center;
-        gap: 10px;
+        justify-content: flex-end;
+        width: 100%;
 
-        .logoMobile {
-            width: 100px;
-            height: 100px;
+        .onCloseButtonMobile {
+          color: orange;
+          background-color: white;
+          border: none;
+          font-size: 18px;
+          padding: 7px;
         }
+      }
+
+      .linkMobile {
+        color: orange;
+        font-weight: 500;
+        letter-spacing: 1.5px;
+        font-size: 16px;
+        border-bottom: 2px solid rgba(255, 166, 0, 0.531);
+        width: 90%;
+        padding: 20px 0px;
+        text-align: center;
+      }
+
+      .logoutButton {
+        background: transparent;
+        border: none;
+        font-family: inherit;
+        cursor: pointer;
+      }
     }
-
-    .contentButtonMobile {
-        z-index: 10;
-
-        .dropdownButtonMobile {
-            background-color: white;
-            border: 2px solid white;
-            border-radius: 100%;
-            font-size: 18px;
-            padding: 7px;
-            color: orange;
-            font-weight: 400;
-
-            .faBars {}
-        }
-
-        .contentDropdownMobile {
-            border: 2px solid orange;
-            background-color: white;
-            position: absolute;
-            display: flex;
-            flex-direction: column;
-            width: 100%;
-            top: 0;
-            left: 0;
-            align-items: center;
-
-            .contentOnCloseButtonMobile {
-                display: flex;
-                justify-content: flex-end;
-                width: 100%;
-
-                .onCloseButtonMobile {
-                    color: orange;
-                    background-color: white;
-                    border: none;
-                    font-size: 18px;
-                    padding: 7px;
-                }
-            }
-
-            .linkMobile {
-                color: orange;
-                font-weight: 500;
-                letter-spacing: 1.5px;
-                font-size: 16px;
-                border-bottom: 2px solid rgba(255, 166, 0, 0.531);
-                width: 90%;
-                padding: 20px 0px;
-                text-align: center;
-            }
-        }
-    }
+  }
 }

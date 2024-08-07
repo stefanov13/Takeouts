@@ -1,17 +1,15 @@
 import { useState } from "react";
-import "./CreateDish.scss";
-import { createDish } from "../../api/meals";
-import useAuth from "../../hooks/useAuth";
-import { useNavigate } from "react-router-dom";
-function CreateDish() {
-  const { accessToken, user } = useAuth();
-  const navigate = useNavigate();
+import "../../../routes/createDish/CreateDish.scss";
+import { editDish } from "../../../api/meals";
+import useAuth from "../../../hooks/useAuth";
 
+function DishEditForm({ dish, id, setToggle, setDish }) {
+  const { user } = useAuth();
   const [form, setForm] = useState({
-    image: "",
-    title: "",
-    ingredients: "",
-    category: "",
+    image: dish.image,
+    title: dish.title,
+    ingredients: dish.ingredients,
+    category: dish.category,
   });
 
   const [errors, setErrors] = useState({});
@@ -51,17 +49,17 @@ function CreateDish() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const ingredientsArr = form.ingredients.split(",");
-    const newForm = { ...form, ingredients: ingredientsArr };
+
     if (validate()) {
-      await createDish(newForm, accessToken, user._id);
+      const data = await editDish(form, id, user._id);
+      setDish((prev) => ({ ...prev, dish: data.dish }));
       setForm({
         image: "",
         title: "",
         ingredients: "",
         category: "",
       });
-      navigate("/meals-list");
+      setToggle(false);
     }
   };
 
@@ -154,11 +152,11 @@ function CreateDish() {
         </div>
 
         <button type="submit" className="createDishButton">
-          Create
+          Edit
         </button>
       </form>
     </div>
   );
 }
 
-export default CreateDish;
+export default DishEditForm;

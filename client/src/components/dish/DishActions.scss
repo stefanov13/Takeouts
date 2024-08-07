@@ -1,0 +1,49 @@
+.dishActions {
+    margin-top: 20px;
+    display: flex;
+    gap: 10px;
+    width: 81%;
+
+    button {
+        color: rgba(255, 0, 0, 0.637);
+        font-weight: 500;
+        letter-spacing: 1.5px;
+        border: 2px solid rgba(255, 166, 0, 0.637);
+        padding: 5px 10px;
+        border-radius: 50px;
+        width: 50%;
+        font-size: 20px;
+        cursor: pointer;
+
+        &:hover {
+            background-color: orange;
+            border: 2px solid orange;
+            color: white;
+        }
+    }
+
+    .editBtn {
+        color: rgba(255, 166, 0, 0.637)
+    }
+
+    .deleteBtn {
+        border: 2px solid rgba(255, 0, 0, 0.637);
+        &:hover {
+            background-color: rgb(255, 0, 0, 0.637);
+            border: 2px solid rgb(255, 0, 0, 0.637);
+            color: white;
+        }
+
+        
+    }
+
+    .disabled {
+        background-color: gray;
+        color: white;
+        cursor: not-allowed;
+
+        &:hover {
+            background-color: gray;
+        }
+    }
+}

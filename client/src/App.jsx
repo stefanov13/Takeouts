@@ -10,25 +10,39 @@ import CreateAccount from "./routes/createAccount/CreateAccount";
 import AdminPanel from "./routes/adminPanel/AdminPanel";
 import NotFound from "./routes/notFound/NotFound";
 import CreateDish from "./routes/createDish/CreateDish";
-import MealsList from "./components/mealsList/MealsList";
+import Layout from "./routes/guards/Layout";
+import GuestRoute from "./routes/guards/GuestRoute";
+import RequireAuth from "./routes/guards/RequireAuth";
+import AdminGuard from "./routes/guards/AdminGuard";
+import MealsList from "./components/meals/MealsList";
+import DishDetails from "./components/dish/DishDetails";
 
 function App() {
   return (
     <div className="layout">
       <Header />
-      <main className="main">
-        <Routes>
-          <Route path="*" element={<NotFound />} />
+      <Routes>
+        <Route path="/" element={<Layout />}>
           <Route path="/" element={<Home />} />
-          <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
-          <Route path="/sign-in" element={<SignIn />} />
-          <Route path="/create-account" element={<CreateAccount />} />
-          <Route path="/create-dish" element={<CreateDish />} />
+          <Route path="/about" element={<About />} />
           <Route path="/meals-list" element={<MealsList />} />
-          <Route path="/admin" element={<AdminPanel />} />
-        </Routes>
-      </main>
+
+          <Route element={<GuestRoute />}>
+            <Route path="/sign-in" element={<SignIn />} />
+            <Route path="/create-account" element={<CreateAccount />} />
+          </Route>
+
+          <Route element={<RequireAuth />}>
+            <Route path="/create-dish" element={<CreateDish />} />
+            <Route path="/meals-list/:dishId" element={<DishDetails />} />
+            <Route element={<AdminGuard />}>
+              <Route path="/admin" element={<AdminPanel />} />
+            </Route>
+          </Route>
+        </Route>
+        <Route path="*" element={<NotFound />} />
+      </Routes>
       <Footer />
     </div>
   );

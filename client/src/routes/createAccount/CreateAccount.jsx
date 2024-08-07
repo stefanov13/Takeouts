@@ -1,175 +1,169 @@
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
-
-import './CreateAccount.scss';
+import { useState } from "react";
+import "./CreateAccount.scss";
+import useAuth from "../../hooks/useAuth";
 
 function CreateAccount() {
-    const [formData, setFormData] = useState({
-        name: '',
-        email: '',
-        password: '',
-        confirmPassword: '',
+  const { register, error, setError } = useAuth();
+
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+  });
+
+  const [errors, setErrors] = useState({
+    name: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value,
     });
+    setError(null);
+  };
 
-    const [errors, setErrors] = useState({
-        name: '',
-        email: '',
-        password: '',
-        confirmPassword: '',
-    });
+  const validate = () => {
+    let isValid = true;
+    let newErrors = { name: "", email: "", password: "", confirmPassword: "" };
 
-    const handleChange = (e) => {
-        const { name, value } = e.target;
+    if (!formData.name || formData.name.length < 3) {
+      newErrors.name = "Name must be at least 3 characters!";
+      isValid = false;
+    }
 
-        setErrors({
-            name: '',
-            email: '',
-            password: '',
-            confirmPassword: '',
-        });
+    if (!formData.email || formData.email.length < 3) {
+      newErrors.email = "Email must be at least 3 characters!";
+      isValid = false;
+    }
 
-        setFormData({
-            ...formData,
-            [name]: value,
-        });
-    };
+    if (!formData.password) {
+      newErrors.password = "Password is required!";
+      isValid = false;
+    }
 
-    const validate = () => {
-        let isValid = true;
-        let newErrors = { name: '', email: '', password: '', confirmPassword: '' };
+    if (formData.confirmPassword !== formData.password) {
+      newErrors.confirmPassword = "Passwords do not match!";
+      isValid = false;
+    }
 
-        if (!formData.name || formData.name.length < 3) {
-            newErrors.name = 'Name must be at least 3 characters!';
-            isValid = false;
-        }
+    setErrors(newErrors);
+    return isValid;
+  };
 
-        if (!formData.email || formData.email.length < 3) {
-            newErrors.email = 'Email must be at least 3 characters!';
-            isValid = false;
-        }
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (validate()) {
+      await register({
+        _name: formData.name,
+        _email: formData.email,
+        password: formData.password,
+        password2: formData.confirmPassword,
+      });
+    }
+  };
 
-        if (!formData.password) {
-            newErrors.password = 'Password is required!';
-            isValid = false;
-        }
+  return (
+    <div className="sectionCreateAccount">
+      <form className="createAccountForm" onSubmit={handleSubmit}>
+        {error && <p className="mainError">{error}</p>}
+        <label htmlFor="name" className="labelCreateAccountForm">
+          Name
+        </label>
+        <input
+          value={formData.name}
+          onChange={handleChange}
+          type="text"
+          id="name"
+          name="name"
+          className="inputCreateAccountForm"
+        />
+        {errors.name && (
+          <div className="loginFormInputError">
+            <p className="error">{errors.name}</p>
+          </div>
+        )}
 
-        if (formData.confirmPassword !== formData.password) {
-            newErrors.confirmPassword = 'Passwords do not match!';
-            isValid = false;
-        }
+        <label htmlFor="email" className="labelCreateAccountForm">
+          Email
+        </label>
+        <input
+          value={formData.email}
+          onChange={handleChange}
+          type="email"
+          id="email"
+          name="email"
+          className="inputCreateAccountForm"
+        />
+        {errors.email && (
+          <div className="loginFormInputError">
+            <p className="error">{errors.email}</p>
+          </div>
+        )}
 
-        setErrors(newErrors);
-        return isValid;
-    };
+        <label htmlFor="password" className="labelCreateAccountForm">
+          Password
+        </label>
+        <input
+          value={formData.password}
+          onChange={handleChange}
+          type="password"
+          id="password"
+          name="password"
+          className="inputCreateAccountForm"
+        />
+        {errors.password && (
+          <div className="createAccountFormInputError">
+            <p className="error">{errors.password}</p>
+          </div>
+        )}
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        if (validate()) {
-            console.log(formData);
-        }
-    };
+        <label htmlFor="confirmPassword" className="labelCreateAccountForm">
+          Confirm Password
+        </label>
+        <input
+          value={formData.confirmPassword}
+          onChange={handleChange}
+          type="password"
+          id="confirmPassword"
+          name="confirmPassword"
+          className="inputCreateAccountForm"
+        />
+        {errors.confirmPassword && (
+          <div className="createAccountFormInputError">
+            <p className="error">{errors.confirmPassword}</p>
+          </div>
+        )}
 
-    return (
-        <div className="sectionCreateAccount">
-            <form className="createAccountForm" onSubmit={handleSubmit}>
-                <label htmlFor="name" className="labelCreateAccountForm">
-                    Name
-                </label>
-                <input
-                    value={formData.name}
-                    onChange={handleChange}
-                    type="text"
-                    id="name"
-                    name="name"
-                    className="inputCreateAccountForm"
-                />
-                {errors.name && (
-                    <div className="loginFormInputError">
-                        <p className="error">{errors.name}</p>
-                    </div>
-                )}
-
-                <label htmlFor="email" className="labelCreateAccountForm">
-                    Email
-                </label>
-                <input
-                    value={formData.email}
-                    onChange={handleChange}
-                    type="email"
-                    id="email"
-                    name="email"
-                    className="inputCreateAccountForm"
-                />
-                {errors.email && (
-                    <div className="loginFormInputError">
-                        <p className="error">{errors.email}</p>
-                    </div>
-                )}
-
-                <label htmlFor="password" className="labelCreateAccountForm">
-                    Password
-                </label>
-                <input
-                    value={formData.password}
-                    onChange={handleChange}
-                    type="password"
-                    id="password"
-                    name="password"
-                    className="inputCreateAccountForm"
-                />
-                {errors.password && (
-                    <div className="createAccountFormInputError">
-                        <p className="error">{errors.password}</p>
-                    </div>
-                )}
-
-                <label htmlFor="confirmPassword" className="labelCreateAccountForm">
-                    Confirm Password
-                </label>
-                <input
-                    value={formData.confirmPassword}
-                    onChange={handleChange}
-                    type="password"
-                    id="confirmPassword"
-                    name="confirmPassword"
-                    className="inputCreateAccountForm"
-                />
-                {errors.confirmPassword && (
-                    <div className="createAccountFormInputError">
-                        <p className="error">{errors.confirmPassword}</p>
-                    </div>
-                )}
-
-                <button
-                    type="submit"
-                    className="buttonCreateAccountForm"
-                    style={{
-                        backgroundColor:
-                            errors.name ||
-                                errors.email ||
-                                errors.password ||
-                                errors.confirmPassword
-                                ? 'lightgray'
-                                : 'orange',
-                    }}
-                    disabled={
-                        errors.name ||
-                        errors.email ||
-                        errors.password ||
-                        errors.confirmPassword
-                    }
-                >
-                    Create Account
-                </button>
-
-                <p>
-                    Already have an account?{" "}
-                    <Link to='/sign-in'>Sign in</Link>
-                </p>
-
-            </form>
-        </div>
-    );
+        <button
+          type="submit"
+          className="buttonCreateAccountForm"
+          style={{
+            backgroundColor:
+              errors.name ||
+              errors.email ||
+              errors.password ||
+              errors.confirmPassword
+                ? "lightgray"
+                : "orange",
+          }}
+          disabled={
+            errors.name ||
+            errors.email ||
+            errors.password ||
+            errors.confirmPassword
+          }
+        >
+          Create Account
+        </button>
+      </form>
+    </div>
+  );
 }
 
 export default CreateAccount;

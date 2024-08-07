@@ -1,21 +1,22 @@
 import "./Footer.scss";
 import { Link, useLocation } from "react-router-dom";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faMap,
   faLocationDot,
-  faPhone, faPaperPlane,
+  faPhone,
+  faPaperPlane,
   faNoteSticky,
   faCalendar,
   faCircleInfo,
-  faHeart
-} from '@fortawesome/free-solid-svg-icons';
-import { faSquareInstagram } from '@fortawesome/free-brands-svg-icons';
+  faHeart,
+} from "@fortawesome/free-solid-svg-icons";
+import { faSquareInstagram } from "@fortawesome/free-brands-svg-icons";
 
 function Footer() {
-  const location = useLocation()
-  if (location.pathname === '/admin'){
-    return null
+  const location = useLocation();
+  if (location.pathname === "/admin") {
+    return null;
   }
   return (
     <footer className="footer">
@@ -24,14 +25,17 @@ function Footer() {
           <div className="contactsFooter">
             <div className="mainTitlesFooter">
               <span>
-                <FontAwesomeIcon icon={faMap} className="faMap"/>
+                <FontAwesomeIcon icon={faMap} className="faMap" />
               </span>
               <h1>About</h1>
             </div>
 
             <ul role="list" className="listAboutFooter">
               <li className="listElementAboutFooter">
-                <FontAwesomeIcon icon={faLocationDot}  className="faLocationDot"/>
+                <FontAwesomeIcon
+                  icon={faLocationDot}
+                  className="faLocationDot"
+                />
                 <span>Sofia, Bulgaria</span>
               </li>
               <li className="listElementAboutFooter">
@@ -39,7 +43,7 @@ function Footer() {
                 <span>+35912345678</span>
               </li>
               <li className="listElementAboutFooter">
-                <FontAwesomeIcon icon={faPaperPlane}  className="faPaperPlane"/>
+                <FontAwesomeIcon icon={faPaperPlane} className="faPaperPlane" />
                 <span>purchases@takeouts.bg</span>
               </li>
             </ul>
@@ -51,7 +55,7 @@ function Footer() {
                 placeholder="Enter email address"
               />
               <button type="submit" className="buttonFormAboutFooter">
-                <FontAwesomeIcon icon={faPaperPlane} className="faPaperPlane"/>
+                <FontAwesomeIcon icon={faPaperPlane} className="faPaperPlane" />
               </button>
             </form>
           </div>
@@ -59,7 +63,7 @@ function Footer() {
           <div className="latestMealsFooter">
             <div className="mainTitlesFooter">
               <span>
-                <FontAwesomeIcon icon={faNoteSticky} className="faNoteSticky"/>
+                <FontAwesomeIcon icon={faNoteSticky} className="faNoteSticky" />
               </span>
               <h1>Latest Meals</h1>
             </div>
@@ -71,14 +75,13 @@ function Footer() {
                   alt="Meals"
                 />
                 <div className="infoCardLatestMealsFooter">
-                  <h3 className="infoTitleCardLatestMealsFooter">
-                    Dish Title
-                  </h3>
+                  <h3 className="infoTitleCardLatestMealsFooter">Dish Title</h3>
                   <p className="infoDescriptionCardLatestMealsFooter">
                     Description
                   </p>
                   <p className="infoDataCardLatestMealsFooter">
-                    <FontAwesomeIcon icon={faCalendar} className="faCalendar"/> Oct. 16, 2019
+                    <FontAwesomeIcon icon={faCalendar} className="faCalendar" />{" "}
+                    Oct. 16, 2019
                   </p>
                 </div>
               </div>
@@ -90,14 +93,13 @@ function Footer() {
                   alt="Meals"
                 />
                 <div className="infoCardLatestMealsFooter">
-                  <h3 className="infoTitleCardLatestMealsFooter">
-                    Dish Title
-                  </h3>
+                  <h3 className="infoTitleCardLatestMealsFooter">Dish Title</h3>
                   <p className="infoDescriptionCardLatestMealsFooter">
                     Description
                   </p>
                   <p className="infoDataCardLatestMealsFooter">
-                    <FontAwesomeIcon icon={faCalendar} className="faCalendar"/> Oct. 16, 2019
+                    <FontAwesomeIcon icon={faCalendar} className="faCalendar" />{" "}
+                    Oct. 16, 2019
                   </p>
                 </div>
               </div>
@@ -107,7 +109,7 @@ function Footer() {
           <div className="informationFooter">
             <div className="mainTitlesFooter">
               <span>
-                <FontAwesomeIcon icon={faCircleInfo} className="faCircleInfo"/>
+                <FontAwesomeIcon icon={faCircleInfo} className="faCircleInfo" />
               </span>
               <h1>Information</h1>
             </div>
@@ -128,7 +130,10 @@ function Footer() {
           <div className="instagramFooter">
             <div className="mainTitlesFooter">
               <span>
-              <FontAwesomeIcon icon={faSquareInstagram} className="faSquareInstagram" />
+                <FontAwesomeIcon
+                  icon={faSquareInstagram}
+                  className="faSquareInstagram"
+                />
               </span>
               <h1>Instagram</h1>
             </div>
@@ -171,7 +176,7 @@ function Footer() {
           <p className="copyrightInfo">Copyright ©2024 All rights reserved.</p>
           <p className="copyrightInfo">
             This template is made <FontAwesomeIcon icon={faHeart} /> by{" "}
-            <Link to="#">LO-MIT</Link>
+            <Link to="#">LO-MI</Link>
           </p>
         </div>
       </div>

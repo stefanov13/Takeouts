@@ -1,100 +1,109 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
-
 import "./SignIn.scss";
+import useAuth from "../../hooks/useAuth";
 
 function SignIn() {
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [errors, setErrors] = useState(null);
-    const [touched, setTouched] = useState({
-        name: false,
-        password: false,
-    });
+  const { login, error, setError } = useAuth();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [errors, setErrors] = useState(null);
+  const [touched, setTouched] = useState({
+    name: false,
+    password: false,
+  });
 
-    const validatePassword = () => {
-        if (!password) {
-            return 'Password is required!';
-        }
-        if (password.length < 6) {
-            return 'Password should have more than 6 characters!';
-        }
-        return null;
-    };
+  const validatePassword = () => {
+    if (!password) {
+      return "Password is required!";
+    }
+    if (password.length < 6) {
+      return "Password should have more than 6 characters!";
+    }
+    return null;
+  };
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        const passwordError = validatePassword();
-        if (passwordError) {
-            setErrors(passwordError);
-            return;
-        }
-    };
-
-    const handleBlur = (field) => (e) => {
-        setTouched({
-            ...touched,
-            [field]: true,
-        });
-    };
-
+  const handleSubmit = async (e) => {
+    e.preventDefault();
     const passwordError = validatePassword();
-    const isFormInvalid = !email || passwordError;
+    if (passwordError) {
+      setErrors(passwordError);
+      return;
+    }
 
-    return (
-        <div className="signInSection">
-            <form className="signInForm" onSubmit={handleSubmit}>
-                <label htmlFor="email" className="signInFormLabel">
-                    Email
-                </label>
-                <input
-                    type="text"
-                    name="email"
-                    className={`signInFormInput ${touched.name && !email ? "signInFormInputError" : ""
-                        }`}
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    onBlur={handleBlur("email")}
-                    required
-                />
+    await login({ _email: email, password });
 
-                <label htmlFor="password" className="signInFormLabel">
-                    Password
-                </label>
-                <input
-                    type="password"
-                    name="password"
-                    className={`signInFormInput ${touched.password && passwordError ? "signInFormInputError" : ""
-                        }`}
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    onBlur={handleBlur("password")}
-                    required
-                />
+    setEmail("");
+    setPassword("");
+  };
 
-                {touched.password && passwordError && (
-                    <p className="error">{passwordError}</p>
-                )}
+  const handleBlur = (field) => (e) => {
+    setTouched({
+      ...touched,
+      [field]: true,
+    });
+    setError(null);
+  };
 
-                {errors && <p className="mainError">{errors}</p>}
+  const passwordError = validatePassword();
+  const isFormInvalid = !email || passwordError;
 
-                <button
-                    type="submit"
-                    disabled={isFormInvalid}
-                    style={{ backgroundColor: isFormInvalid ? "lightgray" : "orange" }}
-                    className="signInFormButton"
-                >
-                    SignIn
-                </button>
+  return (
+    <div className="signInSection">
+      <form className="signInForm" onSubmit={handleSubmit}>
+        {error && <p className="mainError">{error}</p>}
+        <label htmlFor="email" className="signInFormLabel">
+          Email
+        </label>
+        <input
+          type="text"
+          name="email"
+          className={`signInFormInput ${
+            touched.name && !email ? "signInFormInputError" : ""
+          }`}
+          value={email}
+          onChange={(e) => {
+            setEmail(e.target.value);
+            setError(null);
+          }}
+          onBlur={handleBlur("email")}
+          required
+        />
 
-                <p>
-                    Don't have an account?{" "}
-                    <Link to='/create-account'>Sign up</Link>
-                </p>
+        <label htmlFor="password" className="signInFormLabel">
+          Password
+        </label>
+        <input
+          type="password"
+          name="password"
+          className={`signInFormInput ${
+            touched.password && passwordError ? "signInFormInputError" : ""
+          }`}
+          value={password}
+          onChange={(e) => {
+            setPassword(e.target.value);
+            setError(null);
+          }}
+          onBlur={handleBlur("password")}
+          required
+        />
 
-            </form>
-        </div>
-    );
+        {touched.password && passwordError && (
+          <p className="error">{passwordError}</p>
+        )}
+
+        {errors && <p className="mainError">{errors}</p>}
+
+        <button
+          type="submit"
+          disabled={isFormInvalid}
+          style={{ backgroundColor: isFormInvalid ? "lightgray" : "orange" }}
+          className="signInFormButton"
+        >
+          SignIn
+        </button>
+      </form>
+    </div>
+  );
 }
 
 export default SignIn;
