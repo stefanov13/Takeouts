@@ -1,7 +1,15 @@
 import "./Footer.scss";
 import { Link, useLocation } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faMap, faLocationDot, faPhone, faPaperPlane, faNoteSticky, faCalendar, faCircleInfo } from '@fortawesome/free-solid-svg-icons';
+import {
+  faMap,
+  faLocationDot,
+  faPhone, faPaperPlane,
+  faNoteSticky,
+  faCalendar,
+  faCircleInfo,
+  faHeart
+} from '@fortawesome/free-solid-svg-icons';
 import { faSquareInstagram } from '@fortawesome/free-brands-svg-icons';
 
 function Footer() {
@@ -162,8 +170,8 @@ function Footer() {
         <div className="contentCopyRight">
           <p className="copyrightInfo">Copyright ©2024 All rights reserved.</p>
           <p className="copyrightInfo">
-            This template is made <FontAwesomeIcon icon={['fas', 'heart']} /> by{" "}
-            <Link to="#">LO-MI</Link>
+            This template is made <FontAwesomeIcon icon={faHeart} /> by{" "}
+            <Link to="#">LO-MIT</Link>
           </p>
         </div>
       </div>

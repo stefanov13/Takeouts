@@ -12,9 +12,9 @@ function Web() {
             </div>
             <div className="contentLinks">
                 <Link className="link" to="/create-dish">
-                    Create meals
+                    Create dish
                 </Link>
-                <Link className="link" to="/meals">
+                <Link className="link" to="/meals-list">
                     Meals
                 </Link>
                 <Link className="link" to="/about">

@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 import "./Home.scss";
 
 function Home() {
@@ -9,9 +11,9 @@ function Home() {
                 <p class="cover-title-text">
                     only <span>here</span>!
                 </p>
-                <a class="about-meals-link" routerLink="/dashboard">
+                <Link class="about-meals-link" to="/meals-list">
                     Meals
-                </a>
+                </Link>
             </div>
         </div>
     );

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import "./Mobile.scss";
-import { Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars, faHouse, faX } from "@fortawesome/free-solid-svg-icons";
 function Mobile() {
@@ -9,13 +9,13 @@ function Mobile() {
 
 
   const toggleIsShow = () => {
-    setIsShow(()=> !isShow);
+    setIsShow(() => !isShow);
   };
   return (
     <nav className="navigationMobile">
       <div className="contentLogoMobile">
         <Link className="logoMobile linkMobile link" to="/">
-          H&D
+          <img src="/logo.png" alt="" className="logoMobile" />
         </Link>
       </div>
       <div className="contentButtonMobile">
@@ -37,17 +37,17 @@ function Mobile() {
                 <Link className="linkMobile" to="/create-dish">
                   Create Dish
                 </Link>
-                <Link className="linkMobile" to="/meals">
+                <Link className="linkMobile" to="/meals-list">
                   Meals
                 </Link>
                 <Link className="linkMobile" to="/about">
                   About Us
                 </Link>
-                <Link className="linkMobile" to="/profile">
-                  Profile
-                </Link>
                 <Link className="linkMobile" to="/contact">
                   Contacts
+                </Link>
+                <Link className="linkMobile" to="/profile">
+                  Profile
                 </Link>
                 {/* <Link className="linkMobile" onClick={logout}>
                   Log out
